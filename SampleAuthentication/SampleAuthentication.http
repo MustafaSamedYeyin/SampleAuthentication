@@ -1,0 +1,11 @@
+@SampleAuthentication_HostAddress =  https://localhost:7074
+
+GET {{SampleAuthentication_HostAddress}}/api/user/gettoken
+Accept: application/json
+
+###
+
+GET {{SampleAuthentication_HostAddress}}/api/user/getdata
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Ik11c3RhZmEgU2FtZWQiLCJleHAiOjE3NzM5ODM4MDUsImlzcyI6ImxvY2FsaG9zdCIsImF1ZCI6ImxvY2FsaG9zdCJ9.83mRmmBvHxwOBXl2fpng2bAtlvzfsvjlDlB9crRzuXk
+
