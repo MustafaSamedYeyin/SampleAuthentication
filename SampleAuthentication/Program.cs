@@ -1,5 +1,6 @@
 
 using Microsoft.IdentityModel.Tokens;
+using SampleAuthentication.Helper;
 
 namespace SampleAuthentication
 {
@@ -25,6 +26,7 @@ namespace SampleAuthentication
                     ClockSkew = TimeSpan.FromSeconds(1)
                 };
             });
+            builder.Services.AddScoped<JwtHelper>();
 
             var app = builder.Build();
 
