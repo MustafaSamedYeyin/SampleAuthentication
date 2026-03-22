@@ -5,9 +5,15 @@ namespace SampleAuthentication.Helper
 {
     public class JwtHelper
     {
+        public IConfiguration _configuration { get; set; }
+        public JwtHelper(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public string GenerateToken()
         {
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("ThisIsASecretKeyForJwtTokenGenerationAndOnlyYouShouldKnotIt"));
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetValue<string>("secret")));
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityTokenHandler().WriteToken(new JwtSecurityToken(
                 issuer: "localhost",

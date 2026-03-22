@@ -1,6 +1,7 @@
 
 using Microsoft.IdentityModel.Tokens;
 using SampleAuthentication.Helper;
+using System.Text;
 
 namespace SampleAuthentication
 {
@@ -9,7 +10,7 @@ namespace SampleAuthentication
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            var configuration = builder.Configuration;
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
             builder.Services.AddAuthentication().AddJwtBearer(option =>
@@ -22,7 +23,7 @@ namespace SampleAuthentication
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = "localhost",
                     ValidAudience = "localhost",
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("ThisIsASecretKeyForJwtTokenGenerationAndOnlyYouShouldKnotIt")),
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(configuration.GetValue<string>("secret"))),
                     ClockSkew = TimeSpan.FromSeconds(1)
                 };
             });
