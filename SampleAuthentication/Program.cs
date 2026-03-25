@@ -1,6 +1,7 @@
 
 using Microsoft.IdentityModel.Tokens;
 using SampleAuthentication.Helper;
+using System.Net;
 using System.Text;
 
 namespace SampleAuthentication
@@ -11,6 +12,13 @@ namespace SampleAuthentication
         {
             var builder = WebApplication.CreateBuilder(args);
             var configuration = builder.Configuration;
+            builder.WebHost.UseKestrel(options =>
+            {
+                options.Listen(IPAddress.Parse("127.0.0.4"), 1234, config =>
+                {
+                    config.UseHttps("C:\\Lab\\Youtube\\Secure Coding\\Auth\\SampleAuthentication\\SampleAuthentication\\certificate\\yourenvironment.pfx");
+                });
+            });
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
             builder.Services.AddAuthentication().AddJwtBearer(option =>
