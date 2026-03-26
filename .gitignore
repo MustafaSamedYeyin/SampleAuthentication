@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SampleAuthentication/certificate/yourenvironment.crt
+/SampleAuthentication/certificate/yourenvironment.csr
+/SampleAuthentication/certificate/yourenvironment.key
