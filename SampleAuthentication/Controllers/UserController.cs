@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using SampleAuthentication.Dtos;
 using SampleAuthentication.Helper;
 using System.IdentityModel.Tokens.Jwt;
 
@@ -20,7 +21,10 @@ namespace SampleAuthentication.Controllers
         [HttpGet]
         public IActionResult GetToken()
         {
-            return Ok(_jwtHelper.GenerateToken());
+            return Ok(new TokenResponse()
+            {
+                Token = _jwtHelper.GenerateToken()
+            });
         }
 
         [HttpGet]

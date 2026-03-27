@@ -21,6 +21,7 @@ namespace SampleAuthentication
             });
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
+            builder.Services.AddCors();
             builder.Services.AddAuthentication().AddJwtBearer(option =>
             {
                 option.TokenValidationParameters = new TokenValidationParameters
@@ -36,10 +37,12 @@ namespace SampleAuthentication
                 };
             });
             builder.Services.AddScoped<JwtHelper>();
-
             var app = builder.Build();
-
             app.MapOpenApi();
+            app.UseCors(config =>
+            {
+                config.WithOrigins("http://localhost:56132").AllowAnyHeader().AllowAnyMethod();
+            });
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
